@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>语音主观评测</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #5b7fff;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
+      --text: #e2e8f0;
+      --muted: #8b93ad;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(91, 127, 255, 0.18), rgba(167, 139, 250, 0.18));
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .title-wrap h1 {
+      margin: 0;
+      font-size: 1.55rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .progress-wrap {
+      min-width: min(100%, 320px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.35s ease;
+      border-radius: 999px;
+    }
+
+    .instructions {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .instructions ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .instructions li {
+      position: relative;
+      padding-left: 1em;
+      margin-bottom: 8px;
+      line-height: 1.65;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .instructions li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-weight: 700;
+    }
+
+    .scale-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .scale-badge {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .scale-badge b {
+      color: var(--text);
+    }
+
+    .hint-text {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .participant-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .participant-row label {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .participant-row input {
+      width: 260px;
+      max-width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .participant-row input:focus {
+      border-color: var(--accent);
+    }
+
+    .eval-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .eval-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .sample-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(91, 127, 255, 0.14);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .sample-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .sample-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+      min-width: 0;
+      word-break: break-word;
+    }
+
+    .sample-text.loading,
+    .sample-text.muted {
+      color: var(--muted);
+    }
+
+    .group-status {
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .group-status.complete {
+      color: var(--green);
+      border-color: rgba(52, 211, 153, 0.35);
+      background: rgba(52, 211, 153, 0.08);
+    }
+
+    .eval-body {
+      padding: 18px 20px 22px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .audio-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 240px;
+    }
+
+    .audio-card.complete {
+      border-color: rgba(52, 211, 153, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.05);
+    }
+
+    .audio-card h3 {
+      margin: 0;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    .audio-card .alias {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 68px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.78rem;
+      color: var(--muted);
+      align-self: flex-start;
+    }
+
+    audio {
+      width: 100%;
+      height: 36px;
+      border-radius: 8px;
+      accent-color: var(--accent);
+    }
+
+    .score-label {
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .slider-stack {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .score-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--border);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .score-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fb923c;
+      box-shadow: 0 0 8px rgba(251, 146, 60, 0.3);
+      border: none;
+    }
+
+    .score-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fb923c;
+      box-shadow: 0 0 8px rgba(251, 146, 60, 0.3);
+      border: none;
+    }
+
+    .score-value {
+      min-width: 42px;
+      text-align: right;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-value.unset {
+      color: var(--muted);
+    }
+
+    .card-meta-row {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 22px;
+    }
+
+    .score-meaning {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .score-meaning.active {
+      color: var(--text);
+    }
+
+    .ticks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 2px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      line-height: 1;
+    }
+
+    .ticks span {
+      display: inline-flex;
+      justify-content: center;
+      min-width: 1ch;
+    }
+
+    .card-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .card-status.done {
+      color: var(--green);
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: #fff;
+    }
+
+    .footer-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(80px);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: transform 0.28s ease;
+      z-index: 1000;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      max-width: calc(100vw - 24px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.success {
+      color: var(--green);
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+
+    .toast.error {
+      color: var(--red);
+      border-color: rgba(248, 113, 113, 0.35);
+    }
+
+    .toast.warn {
+      color: var(--yellow);
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+
+    @media (max-width: 1100px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .instructions {
+        grid-template-columns: 1fr;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .participant-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .participant-row input {
+        width: 100%;
+      }
+      .eval-header {
+        align-items: flex-start;
+      }
+    }
+
+    .hidden { display: none !important; }
+
+    .consent {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 24px 26px;
+      max-width: 760px;
+      margin: 32px auto;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
+    .consent h2 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .consent ul {
+      margin: 0 0 16px;
+      padding-left: 1.2em;
+    }
+
+    .consent li { margin-bottom: 6px; }
+
+    .consent-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .consent-check input { margin-top: 6px; }
+
+    .ref-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(91, 127, 255, 0.45);
+      background: rgba(91, 127, 255, 0.08);
+    }
+
+    .ref-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .ref-card audio {
+      flex: 1;
+      min-width: 220px;
+      width: auto;
+    }
+
+    .test-choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .test-choice {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .test-choice:hover:not(:disabled) {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .test-choice:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .test-choice-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .test-choice-desc,
+    .test-choice-meta {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 560px) {
+      .test-choices {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-wrap">
+        <div class="title-icon">🎧</div>
+        <h1>语音主观评测</h1>
+      </div>
+
+      <div class="progress-wrap hidden" id="progressWrap">
+        <div class="progress-label">
+          <span id="progressPart"></span>
+          <span id="progressText">0 / 0 完成</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consent" id="loadingPanel">正在加载测试内容...</div>
+
+    <div class="consent hidden" id="consentPanel">
+      <h2>参与说明</h2>
+      <ul>
+        <li>这是一项用于学术研究的语音听感测试，语音均为英语。建议佩戴耳机，在安静环境下完成，并具备基本的英语听力。</li>
+        <li>测试分为下面两套，彼此独立。您可以自行选择参加其中一套，也可以两套都参加，顺序不限。中途退出后，用同一浏览器再次打开可以继续。</li>
+        <li>参与完全自愿，您可以随时关闭页面退出，无需说明理由。</li>
+        <li>测试是匿名的，页面不收集姓名、联系方式或其他可以识别您身份的信息，评分仅用于学术研究。</li>
+      </ul>
+      <label class="consent-check">
+        <input type="checkbox" id="consentBox" />
+        <span>我已了解以上内容，并同意参加本次测试。</span>
+      </label>
+      <div class="test-choices">
+        <button class="test-choice" id="chooseQmos" disabled>
+          <span class="test-choice-title">语音质量测试</span>
+          <span class="test-choice-desc">听语音片段，评价语音的清晰程度和噪声情况。</span>
+          <span class="test-choice-meta" id="metaQmos"></span>
+        </button>
+        <button class="test-choice" id="chooseSmos" disabled>
+          <span class="test-choice-title">说话人相似度测试</span>
+          <span class="test-choice-desc">先听一段参考语音，再判断其他语音是否来自同一说话人。</span>
+          <span class="test-choice-meta" id="metaSmos"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hidden" id="testArea">
+      <div class="instructions" id="instrQmos">
+        <div>
+          <h2 class="section-title">语音质量测试 · 评分须知</h2>
+          <ul>
+            <li>建议先将当前样本对应的 5 条音频都试听一遍，再进行打分。</li>
+            <li>请依据音频整体自然度、清晰度与可接受程度进行主观判断。</li>
+            <li>请尽量保持评分标准一致，尽量不要遗漏。</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="section-title">分值参考（1-5 分）</h2>
+          <div class="scale-badges" id="mosScaleBadges">
+            <span class="scale-badge"><b>5.0</b> 清晰流畅</span>
+            <span class="scale-badge"><b>4.0-4.9</b> 噪声轻微</span>
+            <span class="scale-badge"><b>3.0-3.9</b> 噪声明显</span>
+            <span class="scale-badge"><b>2.0-2.9</b> 噪声突出</span>
+            <span class="scale-badge"><b>1.0-1.9</b> 噪声刺耳</span>
+          </div>
+          <p class="hint-text">请根据整体听感进行评分。</p>
+        </div>
+      </div>
+
+      <div class="instructions hidden" id="instrSmos">
+        <div>
+          <h2 class="section-title">说话人相似度测试 · 评分须知</h2>
+          <ul>
+            <li>每组先听“参考语音”，它是某位说话人的真实录音；再逐条听下面的 5 条语音。</li>
+            <li>请判断每条语音听起来与参考语音是否为同一个人，只关注音色。</li>
+            <li>请不要考虑说话内容和音质好坏。5 条语音朗读的是同一句话。</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="section-title">分值参考（1-5 分）</h2>
+          <div class="scale-badges" id="smosScaleBadges">
+            <span class="scale-badge"><b>4.5-5.0</b> 肯定是同一人</span>
+            <span class="scale-badge"><b>3.5-4.4</b> 可能是同一人</span>
+            <span class="scale-badge"><b>2.5-3.4</b> 无法确定</span>
+            <span class="scale-badge"><b>1.5-2.4</b> 可能不是同一人</span>
+            <span class="scale-badge"><b>1.0-1.4</b> 肯定不是同一人</span>
+          </div>
+          <p class="hint-text">分数越高，表示越像参考语音中的说话人。</p>
+        </div>
+      </div>
+
+      <div class="participant-row">
+        <label>匿名编号：<b id="anonId">-</b></label>
+      </div>
+
+      <div class="eval-card">
+        <div class="eval-header">
+          <div class="sample-main">
+            <div class="sample-badge" id="sampleBadge">第 1 组</div>
+            <div class="sample-text muted" id="sampleText"></div>
+          </div>
+          <div class="group-status" id="groupStatus">未完成</div>
+        </div>
+
+        <div class="eval-body">
+          <div id="refSlot"></div>
+          <div class="cards-grid" id="cardsGrid"></div>
+
+          <div class="nav-row">
+            <div class="nav-left">
+              <button class="btn btn-secondary" id="backBtn">返回测试选择</button>
+              <button class="btn btn-secondary" id="prevBtn">返回上一组</button>
+              <button class="btn btn-secondary" id="nextBtn">下一组</button>
+            </div>
+
+            <div class="nav-right">
+              <span class="footer-note" id="footerNote"></span>
+              <button class="btn btn-danger" id="submitBtn">提交结果</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <iframe name="formSubmitFrame" style="display:none;"></iframe>
+
+  <script>
+    /* =========================
+       需要你在部署前修改的配置
+       ========================= */
+    const CONFIG = {
+      // 目录结构（select_listening_items.py 的输出，直接放进 public/）：
+      // /index.html
+      // /groups.json                     分组表
+      // /MOS/1_1_1.wav ...  /MOS/1.txt   语音质量测试的语音与文本；方法 1 的干净原声同时是相似度测试的参考语音
+      // /SMOS/1_1_1.wav ...              相似度测试的合成语音
+      manifestPath: './groups.json',
+      mosPath: './MOS',
+      smosPath: './SMOS',
+
+      methodIds: [1, 2, 3, 4, 5],        // 1=clean 2=AntiFake 3=SafeSpeech 4=E2E_VGuard 5=Thanos
+      referenceMethodId: 1,
+      minutesPerGroup: { qmos: 0.8, smos: 1.0 },   // 只用于选择页上的预计用时，是粗略估计
+
+      // ===== Google Forms 提交配置 =====
+      // 新建一个表单，只放一道“段落”题。整份结果以一段 JSON 写进这道题，组数变化时不用改表单。
+      // formAction：表单链接里的 /viewform 换成 /formResponse
+      // resultEntry：表单右上角“获取预填链接”，随便填一点内容生成链接，链接里的 entry.xxxxxxx 就是它
+      formAction: 'https://docs.google.com/forms/d/e/1FAIpQLSdM79bZKvXbnpElhjz9CcEzSb5FSqhc2Kptv1CZBuU_docxEw/formResponse',
+      resultEntry: 'entry.1043851247',
+
+      storageKey: 'mosEvalProgressV3'
+    };
+
+    const PARTS = {
+      qmos: { title: '语音质量测试', scoreLabel: '质量评分', badges: '#mosScaleBadges', audioPath: CONFIG.mosPath },
+      smos: { title: '说话人相似度测试', scoreLabel: '相似度评分', badges: '#smosScaleBadges', audioPath: CONFIG.smosPath }
+    };
+
+    /* =========================
+       主逻辑
+       ========================= */
+    let manifest = null;
+    let store = null;    // 保存在本机：{ version, id, consented, active, tests: { qmos: 会话, smos: 会话 } }
+    let part = null;     // 正在进行的测试：'qmos' / 'smos'，null 表示在选择页
+    let session = null;  // 正在进行的测试的会话
+    let toastTimer = null;
+    const groupById = {};
+    const textCache = {};
+
+    const $ = id => document.getElementById(id);
+    const cardsGrid = $('cardsGrid');
+    const refSlot = $('refSlot');
+    const progressText = $('progressText');
+    const progressFill = $('progressFill');
+    const sampleBadge = $('sampleBadge');
+    const sampleTextEl = $('sampleText');
+    const groupStatus = $('groupStatus');
+    const footerNote = $('footerNote');
+    const prevBtn = $('prevBtn');
+    const nextBtn = $('nextBtn');
+    const submitBtn = $('submitBtn');
+
+    function shuffled(list) {
+      const a = [...list];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function randomId() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+
+    function getScoreKey(groupId, methodId) {
+      return `G${String(groupId).padStart(2, '0')}_M${String(methodId).padStart(2, '0')}`;
+    }
+
+    function getAudioPath(base, groupId, methodId, datasetId) {
+      return `${base}/${groupId}_${methodId}_${datasetId}.wav`;
+    }
+
+    function getTextPath(groupId) {
+      return `${CONFIG.mosPath}/${groupId}.txt`;
+    }
+
+    /* ---------- 会话：每套测试的问卷、组顺序、版本顺序都随机，并保存在本机，刷新不变 ---------- */
+    function newSession(setId) {
+      const ids = manifest.groups.filter(g => g.set === setId).map(g => g.id);
+      const methodOrder = {};
+      const scores = {};
+      ids.forEach(id => {
+        methodOrder[id] = shuffled(CONFIG.methodIds);
+        CONFIG.methodIds.forEach(m => { scores[getScoreKey(id, m)] = null; });
+      });
+      return { set: setId, submitted: false, startedAt: Date.now(), step: 0, order: shuffled(ids), methodOrder, scores };
+    }
+
+    function requestedSet() {
+      const n = parseInt(new URLSearchParams(location.search).get('set'), 10);
+      return n >= 1 && n <= manifest.sets ? n : null;
+    }
+
+    function loadStore() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(CONFIG.storageKey) || 'null');
+        if (saved && saved.version === manifest.version) return saved;
+      } catch (error) {
+        console.warn('读取本地进度失败：', error);
+      }
+      return { version: manifest.version, id: randomId(), consented: false, active: null, tests: {} };
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(CONFIG.storageKey, JSON.stringify(store));
+      } catch (error) {
+        console.warn('保存本地进度失败：', error);
+      }
+    }
+
+    function openActive() {
+      part = store.active && store.tests[store.active] ? store.active : null;
+      session = part ? store.tests[part] : null;
+    }
+
+    function startTest(name) {
+      const wanted = requestedSet();
+      const existing = store.tests[name];
+      if (!existing || (wanted !== null && existing.set !== wanted && !existing.submitted)) {
+        store.tests[name] = newSession(wanted === null ? 1 + Math.floor(Math.random() * manifest.sets) : wanted);
+      }
+      store.active = name;
+      persist();
+      openActive();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ---------- 文本与分值含义 ---------- */
+    async function loadGroupText(groupId) {
+      if (Object.prototype.hasOwnProperty.call(textCache, groupId)) return textCache[groupId];
+      try {
+        const response = await fetch(getTextPath(groupId), { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        textCache[groupId] = (await response.text()).trim() || '当前样本文本为空。';
+      } catch (error) {
+        console.warn(`无法读取文本文件：${getTextPath(groupId)}`, error);
+        textCache[groupId] = '当前样本文本加载失败。';
+      }
+      return textCache[groupId];
+    }
+
+    async function updateGroupText(groupId) {
+      sampleTextEl.textContent = '正在加载当前样本文本...';
+      sampleTextEl.className = 'sample-text loading';
+      const text = await loadGroupText(groupId);
+      if (part !== 'qmos' || session.order[session.step] !== groupId) return;
+      sampleTextEl.textContent = text;
+      sampleTextEl.className = 'sample-text' + ((text.includes('加载失败') || text.includes('为空')) ? ' muted' : '');
+    }
+
+    function parseScaleRules(selector) {
+      const badges = Array.from(document.querySelectorAll(`${selector} .scale-badge`));
+      return badges.map(badge => {
+        const rangeText = (badge.querySelector('b')?.textContent || '').trim();
+        const labelText = badge.textContent.replace(rangeText, '').trim();
+        const [left, right] = rangeText.split('-');
+        const min = parseFloat(left);
+        const max = parseFloat(right === undefined ? left : right);
+        if (Number.isNaN(min) || Number.isNaN(max) || !labelText) return null;
+        return { min, max, label: labelText };
+      }).filter(Boolean);
+    }
+
+    const SCALE_RULES = { qmos: parseScaleRules(PARTS.qmos.badges), smos: parseScaleRules(PARTS.smos.badges) };
+
+    function getMeaning(value) {
+      if (typeof value !== 'number') return '待评分';
+      const matched = SCALE_RULES[part].find(rule => value >= rule.min && value <= rule.max);
+      return matched ? matched.label : '未匹配';
+    }
+
+    function formatScoreValue(value) {
+      return typeof value === 'number' ? value.toFixed(1) : '-';
+    }
+
+    function setSliderVisual(slider, value) {
+      const pct = ((value - 1) / 4) * 100;
+      slider.style.background = `linear-gradient(to right, #fb923c ${pct}%, #2e3350 ${pct}%)`;
+    }
+
+    /* ---------- 进度 ---------- */
+    function completionCount(groupId) {
+      return CONFIG.methodIds.filter(m => session.scores[getScoreKey(groupId, m)] !== null).length;
+    }
+
+    function isGroupComplete(groupId) {
+      return completionCount(groupId) === CONFIG.methodIds.length;
+    }
+
+    function updateProgress() {
+      const total = session.order.length;
+      const done = session.order.filter(isGroupComplete).length;
+      progressText.textContent = `${done} / ${total} 完成`;
+      progressFill.style.width = `${total ? (done / total) * 100 : 0}%`;
+    }
+
+    function updateGroupStatus() {
+      const id = session.order[session.step];
+      const complete = isGroupComplete(id);
+      groupStatus.textContent = complete ? '✓ 已完成' : `未完成（${completionCount(id)} / ${CONFIG.methodIds.length}）`;
+      groupStatus.className = 'group-status' + (complete ? ' complete' : '');
+    }
+
+    function updateHeader() {
+      const id = session.order[session.step];
+      const count = session.order.length;
+      const atEnd = session.step === count - 1;
+      $('progressPart').textContent = PARTS[part].title;
+      sampleBadge.textContent = `第 ${session.step + 1} 组`;
+      footerNote.textContent = `第 ${session.step + 1} / ${count} 组`;
+
+      if (part === 'qmos') {
+        updateGroupText(id);
+      } else {
+        sampleTextEl.textContent = '请判断下面 5 条语音与参考语音是否为同一说话人。';
+        sampleTextEl.className = 'sample-text';
+      }
+
+      updateGroupStatus();
+      prevBtn.disabled = session.step === 0;
+      nextBtn.disabled = atEnd;
+      submitBtn.disabled = !atEnd || session.submitted;
+      submitBtn.textContent = session.submitted ? '已提交' : '提交结果';
+      submitBtn.title = atEnd ? '提交本次测试结果' : '请先完成并切换到最后一组后再提交结果。';
+    }
+
+    /* ---------- 卡片 ---------- */
+    function buildCards(groupId) {
+      const cfg = PARTS[part];
+      const group = groupById[groupId];
+
+      if (part === 'smos') {
+        refSlot.innerHTML = `
+          <div class="ref-card">
+            <span class="ref-title">参考语音</span>
+            <audio controls preload="none">
+              <source src="${getAudioPath(CONFIG.mosPath, group.id, CONFIG.referenceMethodId, group.datasetId)}" type="audio/wav" />
+              您的浏览器不支持音频播放。
+            </audio>
+          </div>`;
+      }
+
+      session.methodOrder[groupId].forEach((methodId, index) => {
+        const scoreKey = getScoreKey(group.id, methodId);
+        const currentValue = session.scores[scoreKey];
+        const safeValue = currentValue === null ? 3.0 : currentValue;
+
+        const card = document.createElement('div');
+        card.className = 'audio-card' + (currentValue !== null ? ' complete' : '');
+        card.innerHTML = `
+          <h3>语音 ${'ABCDE'[index]}</h3>
+          <audio controls preload="none">
+            <source src="${getAudioPath(cfg.audioPath, group.id, methodId, group.datasetId)}" type="audio/wav" />
+            您的浏览器不支持音频播放。
+          </audio>
+          <div>
+            <div class="score-label">${cfg.scoreLabel}</div>
+            <div class="slider-row">
+              <div class="slider-stack">
+                <input type="range" class="score-slider" min="1" max="5" step="0.1" value="${safeValue}" />
+                <div class="ticks">
+                  <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-meta-row">
+            <div class="card-status ${currentValue !== null ? 'done' : ''}">${currentValue !== null ? '已评分' : '尚未评分'}</div>
+            <div class="score-meaning ${currentValue !== null ? 'active' : ''}">${getMeaning(currentValue)}</div>
+            <span class="score-value ${currentValue === null ? 'unset' : ''}">${formatScoreValue(currentValue)}</span>
+          </div>
+        `;
+
+        const slider = card.querySelector('.score-slider');
+        setSliderVisual(slider, safeValue);
+        slider.addEventListener('input', event => {
+          const value = parseFloat(event.target.value);
+          session.scores[scoreKey] = value;
+
+          const valueEl = card.querySelector('.score-value');
+          const meaningEl = card.querySelector('.score-meaning');
+          const statusEl = card.querySelector('.card-status');
+          valueEl.textContent = value.toFixed(1);
+          valueEl.classList.remove('unset');
+          meaningEl.textContent = getMeaning(value);
+          meaningEl.classList.add('active');
+          statusEl.textContent = '已评分';
+          statusEl.classList.add('done');
+          card.classList.add('complete');
+          setSliderVisual(event.target, value);
+
+          updateGroupStatus();
+          updateProgress();
+          persist();
+        });
+
+        cardsGrid.appendChild(card);
+      });
+    }
+
+    function renderChoices() {
+      $('consentBox').checked = store.consented;
+      const count = manifest.groups.filter(g => g.set === 1).length;
+      [['qmos', 'Qmos'], ['smos', 'Smos']].forEach(([name, suffix]) => {
+        const test = store.tests[name];
+        const minutes = Math.ceil(count * CONFIG.minutesPerGroup[name]);
+        const status = !test ? '' : (test.submitted ? ' · 已提交' : ' · 进行中，点击继续');
+        $(`meta${suffix}`).textContent = `共 ${count} 组，预计约 ${minutes} 分钟${status}`;
+        $(`choose${suffix}`).disabled = !store.consented || Boolean(test && test.submitted);
+      });
+    }
+
+    function render() {
+      $('loadingPanel').classList.add('hidden');
+      $('consentPanel').classList.toggle('hidden', part !== null);
+      $('testArea').classList.toggle('hidden', part === null);
+      $('progressWrap').classList.toggle('hidden', part === null);
+      if (part === null) {
+        renderChoices();
+        return;
+      }
+
+      $('instrQmos').classList.toggle('hidden', part !== 'qmos');
+      $('instrSmos').classList.toggle('hidden', part !== 'smos');
+      refSlot.innerHTML = '';
+      cardsGrid.innerHTML = '';
+      buildCards(session.order[session.step]);
+      updateHeader();
+      updateProgress();
+    }
+
+    function goToStep(index) {
+      if (index < 0 || index >= session.order.length) return;
+      session.step = index;
+      persist();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ---------- 提交：每套测试单独提交一次，一份回复只含一套测试的评分 ---------- */
+    function countMissing() {
+      return Object.values(session.scores).filter(v => v === null).length;
+    }
+
+    function buildResult() {
+      return {
+        participant: store.id,
+        test: part,
+        set: session.set,
+        version: store.version,
+        status: countMissing() === 0 ? 'complete' : 'incomplete',
+        durationSec: Math.round((Date.now() - session.startedAt) / 1000),
+        ratings: Object.fromEntries(Object.entries(session.scores).map(([k, v]) => [k, v === null ? -1 : v]))
+      };
+    }
+
+    function formConfigReady() {
+      return !String(CONFIG.formAction).includes('REPLACE_') && !String(CONFIG.resultEntry).includes('REPLACE_');
+    }
+
+    function submitToGoogleForms(payload) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = CONFIG.formAction;
+      form.target = 'formSubmitFrame';
+      form.style.display = 'none';
+
+      Object.entries(payload).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    }
+
+    function showToast(message, type = '') {
+      const toast = $('toast');
+      toast.textContent = message;
+      toast.className = 'toast' + (type ? ` ${type}` : '');
+      clearTimeout(toastTimer);
+      requestAnimationFrame(() => toast.classList.add('show'));
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    /* ---------- 事件 ---------- */
+    prevBtn.addEventListener('click', () => goToStep(session.step - 1));
+    nextBtn.addEventListener('click', () => goToStep(session.step + 1));
+
+    $('backBtn').addEventListener('click', () => {
+      store.active = null;
+      persist();
+      openActive();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    $('consentBox').addEventListener('change', event => {
+      store.consented = event.target.checked;
+      persist();
+      renderChoices();
+    });
+
+    $('chooseQmos').addEventListener('click', () => startTest('qmos'));
+    $('chooseSmos').addEventListener('click', () => startTest('smos'));
+
+    // 同一时间只放一条，方便和参考语音来回对比
+    document.addEventListener('play', event => {
+      document.querySelectorAll('audio').forEach(audio => {
+        if (audio !== event.target) audio.pause();
+      });
+    }, true);
+
+    submitBtn.addEventListener('click', () => {
+      if (session.step !== session.order.length - 1 || session.submitted) return;
+
+      if (!formConfigReady()) {
+        showToast('Google Forms 的 formAction 或 resultEntry 尚未填写。', 'error');
+        return;
+      }
+
+      const missingCount = countMissing();
+      if (missingCount > 0) {
+        const ok = window.confirm(`当前仍有 ${missingCount} 项未评分，这些空值会被自动写为 -1。是否继续提交？`);
+        if (!ok) return;
+      }
+
+      submitToGoogleForms({ [CONFIG.resultEntry]: JSON.stringify(buildResult()) });
+      session.submitted = true;
+      persist();
+      updateHeader();
+      showToast('结果已提交，感谢参与！可返回选择另一套测试。', 'success');
+    });
+
+    async function init() {
+      try {
+        const response = await fetch(CONFIG.manifestPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        manifest = await response.json();
+      } catch (error) {
+        console.error('无法读取分组表：', error);
+        $('loadingPanel').textContent = '测试内容加载失败，请刷新页面重试。';
+        return;
+      }
+
+      manifest.groups.forEach(group => { groupById[group.id] = group; });
+      store = loadStore();
+      openActive();
+      $('anonId').textContent = store.id;
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>

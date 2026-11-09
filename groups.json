@@ -1,0 +1,186 @@
+{
+ "version": "seed2026-n9-sets1-xtts-aligned",
+ "sets": 1,
+ "groups": [
+  {
+   "id": 1,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 2,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 3,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 4,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 5,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 6,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 7,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 8,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 9,
+   "datasetId": 1,
+   "set": 1
+  },
+  {
+   "id": 10,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 11,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 12,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 13,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 14,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 15,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 16,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 17,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 18,
+   "datasetId": 2,
+   "set": 1
+  },
+  {
+   "id": 19,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 20,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 21,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 22,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 23,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 24,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 25,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 26,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 27,
+   "datasetId": 3,
+   "set": 1
+  },
+  {
+   "id": 28,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 29,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 30,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 31,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 32,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 33,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 34,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 35,
+   "datasetId": 4,
+   "set": 1
+  },
+  {
+   "id": 36,
+   "datasetId": 4,
+   "set": 1
+  }
+ ]
+}
