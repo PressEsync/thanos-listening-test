@@ -28,10 +28,10 @@ body {
 .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 header.top { padding: 40px 0 18px; }
 .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; }
-.paper { margin: 10px 0 0; color: var(--muted); font-size: 1rem; }
-.intro { margin: 18px 0 0; max-width: 860px; color: var(--muted); }
-.intro a, .legend a { color: var(--accent); }
+h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 2.1rem); line-height: 1.2; max-width: 980px; }
+.intro { margin: 16px 0 0; max-width: 860px; color: var(--muted); }
+.intro + .intro { margin-top: 8px; }
+.intro a { color: var(--accent); }
 nav.sticky {
   position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
@@ -42,16 +42,8 @@ nav.sticky a {
   border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
 }
 nav.sticky a:hover { border-color: var(--accent); }
-.legend {
-  margin: 22px 0 6px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 10px; font-size: 0.93rem; color: var(--muted);
-}
-.legend dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; }
-.legend dt { font-weight: 700; color: var(--ink); }
-.legend dd { margin: 0; }
-.methods { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
 .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
-section.ds { padding: 26px 0 8px; scroll-margin-top: 56px; }
+section.ds { padding: 22px 0 8px; scroll-margin-top: 56px; }
 section.ds > h2 { margin: 0 0 14px; font-size: 1.35rem; }
 section.ds > h2 small { color: var(--muted); font-weight: 400; font-size: 0.9rem; margin-left: 6px; }
 article.sample {
@@ -61,10 +53,9 @@ article.sample {
 .sample-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; }
 .sample-id { font-weight: 700; white-space: nowrap; }
 .sample-text { color: var(--muted); font-size: 0.93rem; }
-.grid { display: grid; grid-template-columns: 150px repeat(5, minmax(0, 1fr)); gap: 8px 10px; align-items: center; }
+.grid { display: grid; grid-template-columns: 64px repeat(5, minmax(0, 1fr)); gap: 8px 10px; align-items: center; }
 .colhead { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
 .rowhead { font-size: 0.85rem; font-weight: 700; }
-.rowhead span { display: block; font-weight: 400; color: var(--muted); font-size: 0.78rem; }
 .cell { min-width: 0; }
 .cell .m { display: none; font-size: 0.8rem; color: var(--muted); margin-bottom: 2px; }
 audio { width: 100%; height: 34px; display: block; }
@@ -78,29 +69,22 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 }
 @media (max-width: 520px) {
   .grid { grid-template-columns: 1fr; }
-  .legend dl { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 <header class="top wrap">
   <p class="eyebrow">Listening study samples</p>
-  <h1>Thanos Listening Samples</h1>
-  <p class="paper">Thanos: Transferable High-Fidelity Adversarial Protection against Unauthorized Speech Synthesis</p>
+  <h1>Thanos: Transferable High-Fidelity Adversarial Protection against Unauthorized Speech Synthesis</h1>
   <p class="intro">All 36 utterances used in the listening study, 9 from each of 4 corpora, each from a different speaker.
   Every method is shown under its own name and in the same order for every utterance.
   The listening-test interface itself, in which method identities were hidden and the order randomized, is available at
   <a href="https://thanos-mos-eval2.vercel.app">thanos-mos-eval2.vercel.app</a>.</p>
+  <p class="intro">The clean recording and the same recording protected by each method. Listeners rated its quality on a 1–5 scale (QMOS).</p>
+  <p class="intro">Speech synthesized by XTTS-v2 with each version above as the reference. Listeners compared it with the clean recording and rated speaker similarity on a 1–5 scale (SMOS).</p>
 </header>
 <nav class="sticky"><div class="wrap"><a href="#libritts">LibriTTS</a><a href="#arctic">CMU ARCTIC</a><a href="#vctk">VCTK</a><a href="#timit">TIMIT</a></div></nav>
 <main class="wrap">
-  <div class="legend">
-    <dl>
-      <dt>Protected speech</dt><dd>The clean recording and the same recording protected by each method. Listeners rated its quality on a 1–5 scale (QMOS).</dd>
-      <dt>Cloned by XTTS-v2</dt><dd>Speech synthesized by XTTS-v2 with each version above as the reference. Listeners compared it with the clean recording and rated speaker similarity on a 1–5 scale (SMOS).</dd>
-    </dl>
-    <div class="methods"><span><span class="dot" style="background:#9E9E9E"></span>Clean</span><span><span class="dot" style="background:#F58518"></span>AntiFake</span><span><span class="dot" style="background:#E45756"></span>SafeSpeech</span><span><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</span><span><span class="dot" style="background:#54A24B"></span>Thanos</span></div>
-  </div>
 <section class="ds" id="libritts"><h2>LibriTTS<small>Samples 01–09</small></h2>
 <article class="sample" id="sample-01">
 <div class="sample-head"><span class="sample-id">Sample 01</span><span class="sample-text">“and then began my evening song while I was singing one of the people from that”</span></div>
@@ -111,18 +95,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/1_1_1.wav" aria-label="Sample 01, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/1_2_1.wav" aria-label="Sample 01, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/1_3_1.wav" aria-label="Sample 01, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/1_4_1.wav" aria-label="Sample 01, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/1_5_1.wav" aria-label="Sample 01, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/1_1_1.wav" aria-label="Sample 01, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/1_2_1.wav" aria-label="Sample 01, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/1_3_1.wav" aria-label="Sample 01, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/1_4_1.wav" aria-label="Sample 01, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/1_5_1.wav" aria-label="Sample 01, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/1_1_1.wav" aria-label="Sample 01, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/1_2_1.wav" aria-label="Sample 01, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/1_3_1.wav" aria-label="Sample 01, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/1_4_1.wav" aria-label="Sample 01, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/1_5_1.wav" aria-label="Sample 01, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/1_1_1.wav" aria-label="Sample 01, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/1_2_1.wav" aria-label="Sample 01, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/1_3_1.wav" aria-label="Sample 01, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/1_4_1.wav" aria-label="Sample 01, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/1_5_1.wav" aria-label="Sample 01, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-02">
@@ -134,18 +118,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/2_1_1.wav" aria-label="Sample 02, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/2_2_1.wav" aria-label="Sample 02, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/2_3_1.wav" aria-label="Sample 02, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/2_4_1.wav" aria-label="Sample 02, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/2_5_1.wav" aria-label="Sample 02, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/2_1_1.wav" aria-label="Sample 02, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/2_2_1.wav" aria-label="Sample 02, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/2_3_1.wav" aria-label="Sample 02, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/2_4_1.wav" aria-label="Sample 02, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/2_5_1.wav" aria-label="Sample 02, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/2_1_1.wav" aria-label="Sample 02, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/2_2_1.wav" aria-label="Sample 02, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/2_3_1.wav" aria-label="Sample 02, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/2_4_1.wav" aria-label="Sample 02, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/2_5_1.wav" aria-label="Sample 02, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/2_1_1.wav" aria-label="Sample 02, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/2_2_1.wav" aria-label="Sample 02, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/2_3_1.wav" aria-label="Sample 02, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/2_4_1.wav" aria-label="Sample 02, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/2_5_1.wav" aria-label="Sample 02, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-03">
@@ -157,18 +141,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/3_1_1.wav" aria-label="Sample 03, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/3_2_1.wav" aria-label="Sample 03, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/3_3_1.wav" aria-label="Sample 03, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/3_4_1.wav" aria-label="Sample 03, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/3_5_1.wav" aria-label="Sample 03, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/3_1_1.wav" aria-label="Sample 03, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/3_2_1.wav" aria-label="Sample 03, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/3_3_1.wav" aria-label="Sample 03, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/3_4_1.wav" aria-label="Sample 03, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/3_5_1.wav" aria-label="Sample 03, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/3_1_1.wav" aria-label="Sample 03, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/3_2_1.wav" aria-label="Sample 03, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/3_3_1.wav" aria-label="Sample 03, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/3_4_1.wav" aria-label="Sample 03, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/3_5_1.wav" aria-label="Sample 03, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/3_1_1.wav" aria-label="Sample 03, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/3_2_1.wav" aria-label="Sample 03, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/3_3_1.wav" aria-label="Sample 03, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/3_4_1.wav" aria-label="Sample 03, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/3_5_1.wav" aria-label="Sample 03, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-04">
@@ -180,18 +164,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/4_1_1.wav" aria-label="Sample 04, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/4_2_1.wav" aria-label="Sample 04, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/4_3_1.wav" aria-label="Sample 04, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/4_4_1.wav" aria-label="Sample 04, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/4_5_1.wav" aria-label="Sample 04, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/4_1_1.wav" aria-label="Sample 04, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/4_2_1.wav" aria-label="Sample 04, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/4_3_1.wav" aria-label="Sample 04, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/4_4_1.wav" aria-label="Sample 04, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/4_5_1.wav" aria-label="Sample 04, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/4_1_1.wav" aria-label="Sample 04, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/4_2_1.wav" aria-label="Sample 04, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/4_3_1.wav" aria-label="Sample 04, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/4_4_1.wav" aria-label="Sample 04, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/4_5_1.wav" aria-label="Sample 04, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/4_1_1.wav" aria-label="Sample 04, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/4_2_1.wav" aria-label="Sample 04, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/4_3_1.wav" aria-label="Sample 04, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/4_4_1.wav" aria-label="Sample 04, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/4_5_1.wav" aria-label="Sample 04, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-05">
@@ -203,18 +187,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/5_1_1.wav" aria-label="Sample 05, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/5_2_1.wav" aria-label="Sample 05, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/5_3_1.wav" aria-label="Sample 05, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/5_4_1.wav" aria-label="Sample 05, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/5_5_1.wav" aria-label="Sample 05, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/5_1_1.wav" aria-label="Sample 05, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/5_2_1.wav" aria-label="Sample 05, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/5_3_1.wav" aria-label="Sample 05, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/5_4_1.wav" aria-label="Sample 05, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/5_5_1.wav" aria-label="Sample 05, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/5_1_1.wav" aria-label="Sample 05, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/5_2_1.wav" aria-label="Sample 05, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/5_3_1.wav" aria-label="Sample 05, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/5_4_1.wav" aria-label="Sample 05, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/5_5_1.wav" aria-label="Sample 05, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/5_1_1.wav" aria-label="Sample 05, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/5_2_1.wav" aria-label="Sample 05, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/5_3_1.wav" aria-label="Sample 05, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/5_4_1.wav" aria-label="Sample 05, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/5_5_1.wav" aria-label="Sample 05, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-06">
@@ -226,18 +210,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/6_1_1.wav" aria-label="Sample 06, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/6_2_1.wav" aria-label="Sample 06, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/6_3_1.wav" aria-label="Sample 06, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/6_4_1.wav" aria-label="Sample 06, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/6_5_1.wav" aria-label="Sample 06, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/6_1_1.wav" aria-label="Sample 06, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/6_2_1.wav" aria-label="Sample 06, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/6_3_1.wav" aria-label="Sample 06, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/6_4_1.wav" aria-label="Sample 06, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/6_5_1.wav" aria-label="Sample 06, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/6_1_1.wav" aria-label="Sample 06, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/6_2_1.wav" aria-label="Sample 06, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/6_3_1.wav" aria-label="Sample 06, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/6_4_1.wav" aria-label="Sample 06, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/6_5_1.wav" aria-label="Sample 06, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/6_1_1.wav" aria-label="Sample 06, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/6_2_1.wav" aria-label="Sample 06, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/6_3_1.wav" aria-label="Sample 06, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/6_4_1.wav" aria-label="Sample 06, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/6_5_1.wav" aria-label="Sample 06, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-07">
@@ -249,18 +233,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/7_1_1.wav" aria-label="Sample 07, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/7_2_1.wav" aria-label="Sample 07, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/7_3_1.wav" aria-label="Sample 07, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/7_4_1.wav" aria-label="Sample 07, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/7_5_1.wav" aria-label="Sample 07, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/7_1_1.wav" aria-label="Sample 07, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/7_2_1.wav" aria-label="Sample 07, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/7_3_1.wav" aria-label="Sample 07, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/7_4_1.wav" aria-label="Sample 07, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/7_5_1.wav" aria-label="Sample 07, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/7_1_1.wav" aria-label="Sample 07, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/7_2_1.wav" aria-label="Sample 07, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/7_3_1.wav" aria-label="Sample 07, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/7_4_1.wav" aria-label="Sample 07, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/7_5_1.wav" aria-label="Sample 07, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/7_1_1.wav" aria-label="Sample 07, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/7_2_1.wav" aria-label="Sample 07, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/7_3_1.wav" aria-label="Sample 07, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/7_4_1.wav" aria-label="Sample 07, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/7_5_1.wav" aria-label="Sample 07, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-08">
@@ -272,18 +256,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/8_1_1.wav" aria-label="Sample 08, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/8_2_1.wav" aria-label="Sample 08, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/8_3_1.wav" aria-label="Sample 08, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/8_4_1.wav" aria-label="Sample 08, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/8_5_1.wav" aria-label="Sample 08, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/8_1_1.wav" aria-label="Sample 08, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/8_2_1.wav" aria-label="Sample 08, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/8_3_1.wav" aria-label="Sample 08, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/8_4_1.wav" aria-label="Sample 08, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/8_5_1.wav" aria-label="Sample 08, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/8_1_1.wav" aria-label="Sample 08, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/8_2_1.wav" aria-label="Sample 08, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/8_3_1.wav" aria-label="Sample 08, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/8_4_1.wav" aria-label="Sample 08, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/8_5_1.wav" aria-label="Sample 08, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/8_1_1.wav" aria-label="Sample 08, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/8_2_1.wav" aria-label="Sample 08, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/8_3_1.wav" aria-label="Sample 08, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/8_4_1.wav" aria-label="Sample 08, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/8_5_1.wav" aria-label="Sample 08, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-09">
@@ -295,18 +279,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/9_1_1.wav" aria-label="Sample 09, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/9_2_1.wav" aria-label="Sample 09, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/9_3_1.wav" aria-label="Sample 09, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/9_4_1.wav" aria-label="Sample 09, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/9_5_1.wav" aria-label="Sample 09, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/9_1_1.wav" aria-label="Sample 09, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/9_2_1.wav" aria-label="Sample 09, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/9_3_1.wav" aria-label="Sample 09, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/9_4_1.wav" aria-label="Sample 09, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/9_5_1.wav" aria-label="Sample 09, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/9_1_1.wav" aria-label="Sample 09, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/9_2_1.wav" aria-label="Sample 09, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/9_3_1.wav" aria-label="Sample 09, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/9_4_1.wav" aria-label="Sample 09, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/9_5_1.wav" aria-label="Sample 09, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/9_1_1.wav" aria-label="Sample 09, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/9_2_1.wav" aria-label="Sample 09, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/9_3_1.wav" aria-label="Sample 09, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/9_4_1.wav" aria-label="Sample 09, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/9_5_1.wav" aria-label="Sample 09, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 </section>
@@ -320,18 +304,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/10_1_2.wav" aria-label="Sample 10, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/10_2_2.wav" aria-label="Sample 10, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/10_3_2.wav" aria-label="Sample 10, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/10_4_2.wav" aria-label="Sample 10, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/10_5_2.wav" aria-label="Sample 10, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/10_1_2.wav" aria-label="Sample 10, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/10_2_2.wav" aria-label="Sample 10, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/10_3_2.wav" aria-label="Sample 10, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/10_4_2.wav" aria-label="Sample 10, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/10_5_2.wav" aria-label="Sample 10, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/10_1_2.wav" aria-label="Sample 10, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/10_2_2.wav" aria-label="Sample 10, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/10_3_2.wav" aria-label="Sample 10, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/10_4_2.wav" aria-label="Sample 10, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/10_5_2.wav" aria-label="Sample 10, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/10_1_2.wav" aria-label="Sample 10, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/10_2_2.wav" aria-label="Sample 10, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/10_3_2.wav" aria-label="Sample 10, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/10_4_2.wav" aria-label="Sample 10, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/10_5_2.wav" aria-label="Sample 10, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-11">
@@ -343,18 +327,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/11_1_2.wav" aria-label="Sample 11, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/11_2_2.wav" aria-label="Sample 11, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/11_3_2.wav" aria-label="Sample 11, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/11_4_2.wav" aria-label="Sample 11, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/11_5_2.wav" aria-label="Sample 11, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/11_1_2.wav" aria-label="Sample 11, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/11_2_2.wav" aria-label="Sample 11, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/11_3_2.wav" aria-label="Sample 11, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/11_4_2.wav" aria-label="Sample 11, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/11_5_2.wav" aria-label="Sample 11, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/11_1_2.wav" aria-label="Sample 11, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/11_2_2.wav" aria-label="Sample 11, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/11_3_2.wav" aria-label="Sample 11, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/11_4_2.wav" aria-label="Sample 11, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/11_5_2.wav" aria-label="Sample 11, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/11_1_2.wav" aria-label="Sample 11, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/11_2_2.wav" aria-label="Sample 11, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/11_3_2.wav" aria-label="Sample 11, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/11_4_2.wav" aria-label="Sample 11, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/11_5_2.wav" aria-label="Sample 11, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-12">
@@ -366,18 +350,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/12_1_2.wav" aria-label="Sample 12, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/12_2_2.wav" aria-label="Sample 12, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/12_3_2.wav" aria-label="Sample 12, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/12_4_2.wav" aria-label="Sample 12, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/12_5_2.wav" aria-label="Sample 12, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/12_1_2.wav" aria-label="Sample 12, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/12_2_2.wav" aria-label="Sample 12, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/12_3_2.wav" aria-label="Sample 12, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/12_4_2.wav" aria-label="Sample 12, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/12_5_2.wav" aria-label="Sample 12, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/12_1_2.wav" aria-label="Sample 12, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/12_2_2.wav" aria-label="Sample 12, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/12_3_2.wav" aria-label="Sample 12, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/12_4_2.wav" aria-label="Sample 12, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/12_5_2.wav" aria-label="Sample 12, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/12_1_2.wav" aria-label="Sample 12, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/12_2_2.wav" aria-label="Sample 12, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/12_3_2.wav" aria-label="Sample 12, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/12_4_2.wav" aria-label="Sample 12, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/12_5_2.wav" aria-label="Sample 12, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-13">
@@ -389,18 +373,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/13_1_2.wav" aria-label="Sample 13, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/13_2_2.wav" aria-label="Sample 13, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/13_3_2.wav" aria-label="Sample 13, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/13_4_2.wav" aria-label="Sample 13, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/13_5_2.wav" aria-label="Sample 13, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/13_1_2.wav" aria-label="Sample 13, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/13_2_2.wav" aria-label="Sample 13, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/13_3_2.wav" aria-label="Sample 13, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/13_4_2.wav" aria-label="Sample 13, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/13_5_2.wav" aria-label="Sample 13, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/13_1_2.wav" aria-label="Sample 13, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/13_2_2.wav" aria-label="Sample 13, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/13_3_2.wav" aria-label="Sample 13, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/13_4_2.wav" aria-label="Sample 13, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/13_5_2.wav" aria-label="Sample 13, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/13_1_2.wav" aria-label="Sample 13, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/13_2_2.wav" aria-label="Sample 13, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/13_3_2.wav" aria-label="Sample 13, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/13_4_2.wav" aria-label="Sample 13, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/13_5_2.wav" aria-label="Sample 13, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-14">
@@ -412,18 +396,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/14_1_2.wav" aria-label="Sample 14, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/14_2_2.wav" aria-label="Sample 14, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/14_3_2.wav" aria-label="Sample 14, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/14_4_2.wav" aria-label="Sample 14, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/14_5_2.wav" aria-label="Sample 14, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/14_1_2.wav" aria-label="Sample 14, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/14_2_2.wav" aria-label="Sample 14, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/14_3_2.wav" aria-label="Sample 14, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/14_4_2.wav" aria-label="Sample 14, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/14_5_2.wav" aria-label="Sample 14, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/14_1_2.wav" aria-label="Sample 14, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/14_2_2.wav" aria-label="Sample 14, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/14_3_2.wav" aria-label="Sample 14, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/14_4_2.wav" aria-label="Sample 14, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/14_5_2.wav" aria-label="Sample 14, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/14_1_2.wav" aria-label="Sample 14, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/14_2_2.wav" aria-label="Sample 14, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/14_3_2.wav" aria-label="Sample 14, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/14_4_2.wav" aria-label="Sample 14, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/14_5_2.wav" aria-label="Sample 14, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-15">
@@ -435,18 +419,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/15_1_2.wav" aria-label="Sample 15, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/15_2_2.wav" aria-label="Sample 15, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/15_3_2.wav" aria-label="Sample 15, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/15_4_2.wav" aria-label="Sample 15, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/15_5_2.wav" aria-label="Sample 15, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/15_1_2.wav" aria-label="Sample 15, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/15_2_2.wav" aria-label="Sample 15, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/15_3_2.wav" aria-label="Sample 15, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/15_4_2.wav" aria-label="Sample 15, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/15_5_2.wav" aria-label="Sample 15, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/15_1_2.wav" aria-label="Sample 15, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/15_2_2.wav" aria-label="Sample 15, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/15_3_2.wav" aria-label="Sample 15, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/15_4_2.wav" aria-label="Sample 15, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/15_5_2.wav" aria-label="Sample 15, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/15_1_2.wav" aria-label="Sample 15, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/15_2_2.wav" aria-label="Sample 15, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/15_3_2.wav" aria-label="Sample 15, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/15_4_2.wav" aria-label="Sample 15, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/15_5_2.wav" aria-label="Sample 15, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-16">
@@ -458,18 +442,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/16_1_2.wav" aria-label="Sample 16, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/16_2_2.wav" aria-label="Sample 16, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/16_3_2.wav" aria-label="Sample 16, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/16_4_2.wav" aria-label="Sample 16, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/16_5_2.wav" aria-label="Sample 16, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/16_1_2.wav" aria-label="Sample 16, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/16_2_2.wav" aria-label="Sample 16, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/16_3_2.wav" aria-label="Sample 16, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/16_4_2.wav" aria-label="Sample 16, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/16_5_2.wav" aria-label="Sample 16, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/16_1_2.wav" aria-label="Sample 16, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/16_2_2.wav" aria-label="Sample 16, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/16_3_2.wav" aria-label="Sample 16, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/16_4_2.wav" aria-label="Sample 16, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/16_5_2.wav" aria-label="Sample 16, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/16_1_2.wav" aria-label="Sample 16, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/16_2_2.wav" aria-label="Sample 16, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/16_3_2.wav" aria-label="Sample 16, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/16_4_2.wav" aria-label="Sample 16, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/16_5_2.wav" aria-label="Sample 16, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-17">
@@ -481,18 +465,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/17_1_2.wav" aria-label="Sample 17, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/17_2_2.wav" aria-label="Sample 17, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/17_3_2.wav" aria-label="Sample 17, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/17_4_2.wav" aria-label="Sample 17, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/17_5_2.wav" aria-label="Sample 17, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/17_1_2.wav" aria-label="Sample 17, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/17_2_2.wav" aria-label="Sample 17, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/17_3_2.wav" aria-label="Sample 17, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/17_4_2.wav" aria-label="Sample 17, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/17_5_2.wav" aria-label="Sample 17, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/17_1_2.wav" aria-label="Sample 17, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/17_2_2.wav" aria-label="Sample 17, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/17_3_2.wav" aria-label="Sample 17, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/17_4_2.wav" aria-label="Sample 17, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/17_5_2.wav" aria-label="Sample 17, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/17_1_2.wav" aria-label="Sample 17, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/17_2_2.wav" aria-label="Sample 17, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/17_3_2.wav" aria-label="Sample 17, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/17_4_2.wav" aria-label="Sample 17, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/17_5_2.wav" aria-label="Sample 17, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-18">
@@ -504,18 +488,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/18_1_2.wav" aria-label="Sample 18, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/18_2_2.wav" aria-label="Sample 18, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/18_3_2.wav" aria-label="Sample 18, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/18_4_2.wav" aria-label="Sample 18, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/18_5_2.wav" aria-label="Sample 18, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/18_1_2.wav" aria-label="Sample 18, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/18_2_2.wav" aria-label="Sample 18, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/18_3_2.wav" aria-label="Sample 18, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/18_4_2.wav" aria-label="Sample 18, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/18_5_2.wav" aria-label="Sample 18, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/18_1_2.wav" aria-label="Sample 18, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/18_2_2.wav" aria-label="Sample 18, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/18_3_2.wav" aria-label="Sample 18, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/18_4_2.wav" aria-label="Sample 18, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/18_5_2.wav" aria-label="Sample 18, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/18_1_2.wav" aria-label="Sample 18, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/18_2_2.wav" aria-label="Sample 18, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/18_3_2.wav" aria-label="Sample 18, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/18_4_2.wav" aria-label="Sample 18, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/18_5_2.wav" aria-label="Sample 18, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 </section>
@@ -529,18 +513,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/19_1_3.wav" aria-label="Sample 19, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/19_2_3.wav" aria-label="Sample 19, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/19_3_3.wav" aria-label="Sample 19, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/19_4_3.wav" aria-label="Sample 19, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/19_5_3.wav" aria-label="Sample 19, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/19_1_3.wav" aria-label="Sample 19, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/19_2_3.wav" aria-label="Sample 19, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/19_3_3.wav" aria-label="Sample 19, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/19_4_3.wav" aria-label="Sample 19, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/19_5_3.wav" aria-label="Sample 19, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/19_1_3.wav" aria-label="Sample 19, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/19_2_3.wav" aria-label="Sample 19, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/19_3_3.wav" aria-label="Sample 19, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/19_4_3.wav" aria-label="Sample 19, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/19_5_3.wav" aria-label="Sample 19, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/19_1_3.wav" aria-label="Sample 19, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/19_2_3.wav" aria-label="Sample 19, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/19_3_3.wav" aria-label="Sample 19, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/19_4_3.wav" aria-label="Sample 19, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/19_5_3.wav" aria-label="Sample 19, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-20">
@@ -552,18 +536,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/20_1_3.wav" aria-label="Sample 20, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/20_2_3.wav" aria-label="Sample 20, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/20_3_3.wav" aria-label="Sample 20, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/20_4_3.wav" aria-label="Sample 20, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/20_5_3.wav" aria-label="Sample 20, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/20_1_3.wav" aria-label="Sample 20, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/20_2_3.wav" aria-label="Sample 20, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/20_3_3.wav" aria-label="Sample 20, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/20_4_3.wav" aria-label="Sample 20, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/20_5_3.wav" aria-label="Sample 20, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/20_1_3.wav" aria-label="Sample 20, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/20_2_3.wav" aria-label="Sample 20, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/20_3_3.wav" aria-label="Sample 20, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/20_4_3.wav" aria-label="Sample 20, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/20_5_3.wav" aria-label="Sample 20, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/20_1_3.wav" aria-label="Sample 20, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/20_2_3.wav" aria-label="Sample 20, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/20_3_3.wav" aria-label="Sample 20, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/20_4_3.wav" aria-label="Sample 20, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/20_5_3.wav" aria-label="Sample 20, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-21">
@@ -575,18 +559,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/21_1_3.wav" aria-label="Sample 21, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/21_2_3.wav" aria-label="Sample 21, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/21_3_3.wav" aria-label="Sample 21, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/21_4_3.wav" aria-label="Sample 21, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/21_5_3.wav" aria-label="Sample 21, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/21_1_3.wav" aria-label="Sample 21, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/21_2_3.wav" aria-label="Sample 21, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/21_3_3.wav" aria-label="Sample 21, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/21_4_3.wav" aria-label="Sample 21, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/21_5_3.wav" aria-label="Sample 21, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/21_1_3.wav" aria-label="Sample 21, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/21_2_3.wav" aria-label="Sample 21, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/21_3_3.wav" aria-label="Sample 21, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/21_4_3.wav" aria-label="Sample 21, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/21_5_3.wav" aria-label="Sample 21, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/21_1_3.wav" aria-label="Sample 21, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/21_2_3.wav" aria-label="Sample 21, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/21_3_3.wav" aria-label="Sample 21, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/21_4_3.wav" aria-label="Sample 21, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/21_5_3.wav" aria-label="Sample 21, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-22">
@@ -598,18 +582,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/22_1_3.wav" aria-label="Sample 22, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/22_2_3.wav" aria-label="Sample 22, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/22_3_3.wav" aria-label="Sample 22, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/22_4_3.wav" aria-label="Sample 22, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/22_5_3.wav" aria-label="Sample 22, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/22_1_3.wav" aria-label="Sample 22, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/22_2_3.wav" aria-label="Sample 22, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/22_3_3.wav" aria-label="Sample 22, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/22_4_3.wav" aria-label="Sample 22, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/22_5_3.wav" aria-label="Sample 22, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/22_1_3.wav" aria-label="Sample 22, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/22_2_3.wav" aria-label="Sample 22, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/22_3_3.wav" aria-label="Sample 22, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/22_4_3.wav" aria-label="Sample 22, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/22_5_3.wav" aria-label="Sample 22, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/22_1_3.wav" aria-label="Sample 22, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/22_2_3.wav" aria-label="Sample 22, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/22_3_3.wav" aria-label="Sample 22, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/22_4_3.wav" aria-label="Sample 22, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/22_5_3.wav" aria-label="Sample 22, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-23">
@@ -621,18 +605,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/23_1_3.wav" aria-label="Sample 23, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/23_2_3.wav" aria-label="Sample 23, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/23_3_3.wav" aria-label="Sample 23, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/23_4_3.wav" aria-label="Sample 23, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/23_5_3.wav" aria-label="Sample 23, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/23_1_3.wav" aria-label="Sample 23, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/23_2_3.wav" aria-label="Sample 23, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/23_3_3.wav" aria-label="Sample 23, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/23_4_3.wav" aria-label="Sample 23, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/23_5_3.wav" aria-label="Sample 23, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/23_1_3.wav" aria-label="Sample 23, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/23_2_3.wav" aria-label="Sample 23, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/23_3_3.wav" aria-label="Sample 23, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/23_4_3.wav" aria-label="Sample 23, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/23_5_3.wav" aria-label="Sample 23, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/23_1_3.wav" aria-label="Sample 23, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/23_2_3.wav" aria-label="Sample 23, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/23_3_3.wav" aria-label="Sample 23, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/23_4_3.wav" aria-label="Sample 23, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/23_5_3.wav" aria-label="Sample 23, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-24">
@@ -644,18 +628,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/24_1_3.wav" aria-label="Sample 24, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/24_2_3.wav" aria-label="Sample 24, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/24_3_3.wav" aria-label="Sample 24, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/24_4_3.wav" aria-label="Sample 24, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/24_5_3.wav" aria-label="Sample 24, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/24_1_3.wav" aria-label="Sample 24, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/24_2_3.wav" aria-label="Sample 24, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/24_3_3.wav" aria-label="Sample 24, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/24_4_3.wav" aria-label="Sample 24, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/24_5_3.wav" aria-label="Sample 24, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/24_1_3.wav" aria-label="Sample 24, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/24_2_3.wav" aria-label="Sample 24, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/24_3_3.wav" aria-label="Sample 24, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/24_4_3.wav" aria-label="Sample 24, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/24_5_3.wav" aria-label="Sample 24, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/24_1_3.wav" aria-label="Sample 24, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/24_2_3.wav" aria-label="Sample 24, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/24_3_3.wav" aria-label="Sample 24, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/24_4_3.wav" aria-label="Sample 24, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/24_5_3.wav" aria-label="Sample 24, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-25">
@@ -667,18 +651,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/25_1_3.wav" aria-label="Sample 25, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/25_2_3.wav" aria-label="Sample 25, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/25_3_3.wav" aria-label="Sample 25, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/25_4_3.wav" aria-label="Sample 25, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/25_5_3.wav" aria-label="Sample 25, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/25_1_3.wav" aria-label="Sample 25, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/25_2_3.wav" aria-label="Sample 25, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/25_3_3.wav" aria-label="Sample 25, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/25_4_3.wav" aria-label="Sample 25, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/25_5_3.wav" aria-label="Sample 25, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/25_1_3.wav" aria-label="Sample 25, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/25_2_3.wav" aria-label="Sample 25, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/25_3_3.wav" aria-label="Sample 25, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/25_4_3.wav" aria-label="Sample 25, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/25_5_3.wav" aria-label="Sample 25, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/25_1_3.wav" aria-label="Sample 25, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/25_2_3.wav" aria-label="Sample 25, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/25_3_3.wav" aria-label="Sample 25, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/25_4_3.wav" aria-label="Sample 25, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/25_5_3.wav" aria-label="Sample 25, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-26">
@@ -690,18 +674,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/26_1_3.wav" aria-label="Sample 26, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/26_2_3.wav" aria-label="Sample 26, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/26_3_3.wav" aria-label="Sample 26, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/26_4_3.wav" aria-label="Sample 26, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/26_5_3.wav" aria-label="Sample 26, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/26_1_3.wav" aria-label="Sample 26, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/26_2_3.wav" aria-label="Sample 26, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/26_3_3.wav" aria-label="Sample 26, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/26_4_3.wav" aria-label="Sample 26, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/26_5_3.wav" aria-label="Sample 26, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/26_1_3.wav" aria-label="Sample 26, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/26_2_3.wav" aria-label="Sample 26, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/26_3_3.wav" aria-label="Sample 26, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/26_4_3.wav" aria-label="Sample 26, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/26_5_3.wav" aria-label="Sample 26, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/26_1_3.wav" aria-label="Sample 26, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/26_2_3.wav" aria-label="Sample 26, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/26_3_3.wav" aria-label="Sample 26, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/26_4_3.wav" aria-label="Sample 26, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/26_5_3.wav" aria-label="Sample 26, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-27">
@@ -713,18 +697,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/27_1_3.wav" aria-label="Sample 27, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/27_2_3.wav" aria-label="Sample 27, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/27_3_3.wav" aria-label="Sample 27, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/27_4_3.wav" aria-label="Sample 27, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/27_5_3.wav" aria-label="Sample 27, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/27_1_3.wav" aria-label="Sample 27, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/27_2_3.wav" aria-label="Sample 27, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/27_3_3.wav" aria-label="Sample 27, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/27_4_3.wav" aria-label="Sample 27, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/27_5_3.wav" aria-label="Sample 27, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/27_1_3.wav" aria-label="Sample 27, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/27_2_3.wav" aria-label="Sample 27, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/27_3_3.wav" aria-label="Sample 27, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/27_4_3.wav" aria-label="Sample 27, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/27_5_3.wav" aria-label="Sample 27, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/27_1_3.wav" aria-label="Sample 27, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/27_2_3.wav" aria-label="Sample 27, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/27_3_3.wav" aria-label="Sample 27, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/27_4_3.wav" aria-label="Sample 27, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/27_5_3.wav" aria-label="Sample 27, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 </section>
@@ -738,18 +722,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/28_1_4.wav" aria-label="Sample 28, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/28_2_4.wav" aria-label="Sample 28, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/28_3_4.wav" aria-label="Sample 28, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/28_4_4.wav" aria-label="Sample 28, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/28_5_4.wav" aria-label="Sample 28, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/28_1_4.wav" aria-label="Sample 28, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/28_2_4.wav" aria-label="Sample 28, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/28_3_4.wav" aria-label="Sample 28, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/28_4_4.wav" aria-label="Sample 28, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/28_5_4.wav" aria-label="Sample 28, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/28_1_4.wav" aria-label="Sample 28, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/28_2_4.wav" aria-label="Sample 28, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/28_3_4.wav" aria-label="Sample 28, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/28_4_4.wav" aria-label="Sample 28, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/28_5_4.wav" aria-label="Sample 28, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/28_1_4.wav" aria-label="Sample 28, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/28_2_4.wav" aria-label="Sample 28, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/28_3_4.wav" aria-label="Sample 28, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/28_4_4.wav" aria-label="Sample 28, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/28_5_4.wav" aria-label="Sample 28, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-29">
@@ -761,18 +745,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/29_1_4.wav" aria-label="Sample 29, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/29_2_4.wav" aria-label="Sample 29, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/29_3_4.wav" aria-label="Sample 29, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/29_4_4.wav" aria-label="Sample 29, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/29_5_4.wav" aria-label="Sample 29, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/29_1_4.wav" aria-label="Sample 29, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/29_2_4.wav" aria-label="Sample 29, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/29_3_4.wav" aria-label="Sample 29, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/29_4_4.wav" aria-label="Sample 29, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/29_5_4.wav" aria-label="Sample 29, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/29_1_4.wav" aria-label="Sample 29, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/29_2_4.wav" aria-label="Sample 29, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/29_3_4.wav" aria-label="Sample 29, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/29_4_4.wav" aria-label="Sample 29, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/29_5_4.wav" aria-label="Sample 29, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/29_1_4.wav" aria-label="Sample 29, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/29_2_4.wav" aria-label="Sample 29, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/29_3_4.wav" aria-label="Sample 29, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/29_4_4.wav" aria-label="Sample 29, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/29_5_4.wav" aria-label="Sample 29, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-30">
@@ -784,18 +768,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/30_1_4.wav" aria-label="Sample 30, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/30_2_4.wav" aria-label="Sample 30, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/30_3_4.wav" aria-label="Sample 30, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/30_4_4.wav" aria-label="Sample 30, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/30_5_4.wav" aria-label="Sample 30, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/30_1_4.wav" aria-label="Sample 30, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/30_2_4.wav" aria-label="Sample 30, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/30_3_4.wav" aria-label="Sample 30, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/30_4_4.wav" aria-label="Sample 30, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/30_5_4.wav" aria-label="Sample 30, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/30_1_4.wav" aria-label="Sample 30, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/30_2_4.wav" aria-label="Sample 30, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/30_3_4.wav" aria-label="Sample 30, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/30_4_4.wav" aria-label="Sample 30, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/30_5_4.wav" aria-label="Sample 30, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/30_1_4.wav" aria-label="Sample 30, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/30_2_4.wav" aria-label="Sample 30, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/30_3_4.wav" aria-label="Sample 30, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/30_4_4.wav" aria-label="Sample 30, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/30_5_4.wav" aria-label="Sample 30, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-31">
@@ -807,18 +791,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/31_1_4.wav" aria-label="Sample 31, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/31_2_4.wav" aria-label="Sample 31, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/31_3_4.wav" aria-label="Sample 31, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/31_4_4.wav" aria-label="Sample 31, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/31_5_4.wav" aria-label="Sample 31, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/31_1_4.wav" aria-label="Sample 31, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/31_2_4.wav" aria-label="Sample 31, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/31_3_4.wav" aria-label="Sample 31, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/31_4_4.wav" aria-label="Sample 31, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/31_5_4.wav" aria-label="Sample 31, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/31_1_4.wav" aria-label="Sample 31, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/31_2_4.wav" aria-label="Sample 31, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/31_3_4.wav" aria-label="Sample 31, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/31_4_4.wav" aria-label="Sample 31, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/31_5_4.wav" aria-label="Sample 31, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/31_1_4.wav" aria-label="Sample 31, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/31_2_4.wav" aria-label="Sample 31, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/31_3_4.wav" aria-label="Sample 31, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/31_4_4.wav" aria-label="Sample 31, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/31_5_4.wav" aria-label="Sample 31, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-32">
@@ -830,18 +814,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/32_1_4.wav" aria-label="Sample 32, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/32_2_4.wav" aria-label="Sample 32, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/32_3_4.wav" aria-label="Sample 32, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/32_4_4.wav" aria-label="Sample 32, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/32_5_4.wav" aria-label="Sample 32, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/32_1_4.wav" aria-label="Sample 32, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/32_2_4.wav" aria-label="Sample 32, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/32_3_4.wav" aria-label="Sample 32, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/32_4_4.wav" aria-label="Sample 32, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/32_5_4.wav" aria-label="Sample 32, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/32_1_4.wav" aria-label="Sample 32, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/32_2_4.wav" aria-label="Sample 32, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/32_3_4.wav" aria-label="Sample 32, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/32_4_4.wav" aria-label="Sample 32, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/32_5_4.wav" aria-label="Sample 32, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/32_1_4.wav" aria-label="Sample 32, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/32_2_4.wav" aria-label="Sample 32, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/32_3_4.wav" aria-label="Sample 32, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/32_4_4.wav" aria-label="Sample 32, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/32_5_4.wav" aria-label="Sample 32, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-33">
@@ -853,18 +837,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/33_1_4.wav" aria-label="Sample 33, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/33_2_4.wav" aria-label="Sample 33, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/33_3_4.wav" aria-label="Sample 33, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/33_4_4.wav" aria-label="Sample 33, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/33_5_4.wav" aria-label="Sample 33, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/33_1_4.wav" aria-label="Sample 33, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/33_2_4.wav" aria-label="Sample 33, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/33_3_4.wav" aria-label="Sample 33, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/33_4_4.wav" aria-label="Sample 33, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/33_5_4.wav" aria-label="Sample 33, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/33_1_4.wav" aria-label="Sample 33, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/33_2_4.wav" aria-label="Sample 33, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/33_3_4.wav" aria-label="Sample 33, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/33_4_4.wav" aria-label="Sample 33, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/33_5_4.wav" aria-label="Sample 33, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/33_1_4.wav" aria-label="Sample 33, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/33_2_4.wav" aria-label="Sample 33, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/33_3_4.wav" aria-label="Sample 33, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/33_4_4.wav" aria-label="Sample 33, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/33_5_4.wav" aria-label="Sample 33, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-34">
@@ -876,18 +860,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/34_1_4.wav" aria-label="Sample 34, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/34_2_4.wav" aria-label="Sample 34, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/34_3_4.wav" aria-label="Sample 34, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/34_4_4.wav" aria-label="Sample 34, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/34_5_4.wav" aria-label="Sample 34, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/34_1_4.wav" aria-label="Sample 34, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/34_2_4.wav" aria-label="Sample 34, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/34_3_4.wav" aria-label="Sample 34, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/34_4_4.wav" aria-label="Sample 34, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/34_5_4.wav" aria-label="Sample 34, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/34_1_4.wav" aria-label="Sample 34, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/34_2_4.wav" aria-label="Sample 34, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/34_3_4.wav" aria-label="Sample 34, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/34_4_4.wav" aria-label="Sample 34, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/34_5_4.wav" aria-label="Sample 34, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/34_1_4.wav" aria-label="Sample 34, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/34_2_4.wav" aria-label="Sample 34, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/34_3_4.wav" aria-label="Sample 34, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/34_4_4.wav" aria-label="Sample 34, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/34_5_4.wav" aria-label="Sample 34, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-35">
@@ -899,18 +883,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/35_1_4.wav" aria-label="Sample 35, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/35_2_4.wav" aria-label="Sample 35, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/35_3_4.wav" aria-label="Sample 35, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/35_4_4.wav" aria-label="Sample 35, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/35_5_4.wav" aria-label="Sample 35, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/35_1_4.wav" aria-label="Sample 35, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/35_2_4.wav" aria-label="Sample 35, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/35_3_4.wav" aria-label="Sample 35, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/35_4_4.wav" aria-label="Sample 35, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/35_5_4.wav" aria-label="Sample 35, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/35_1_4.wav" aria-label="Sample 35, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/35_2_4.wav" aria-label="Sample 35, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/35_3_4.wav" aria-label="Sample 35, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/35_4_4.wav" aria-label="Sample 35, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/35_5_4.wav" aria-label="Sample 35, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/35_1_4.wav" aria-label="Sample 35, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/35_2_4.wav" aria-label="Sample 35, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/35_3_4.wav" aria-label="Sample 35, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/35_4_4.wav" aria-label="Sample 35, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/35_5_4.wav" aria-label="Sample 35, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 <article class="sample" id="sample-36">
@@ -922,18 +906,18 @@ footer { padding: 26px 0 40px; color: var(--muted); font-size: 0.88rem; }
 <div class="colhead"><span class="dot" style="background:#E45756"></span>SafeSpeech</div>
 <div class="colhead"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div>
 <div class="colhead"><span class="dot" style="background:#54A24B"></span>Thanos</div>
-<div class="rowhead">Protected speech<span>rated for quality (QMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/36_1_4.wav" aria-label="Sample 36, Clean, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/36_2_4.wav" aria-label="Sample 36, AntiFake, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/36_3_4.wav" aria-label="Sample 36, SafeSpeech, protected speech"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/36_4_4.wav" aria-label="Sample 36, E2E-VGuard, protected speech"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/36_5_4.wav" aria-label="Sample 36, Thanos, protected speech"></audio></div>
-<div class="rowhead">Cloned by XTTS-v2<span>rated for speaker similarity (SMOS)</span></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/36_1_4.wav" aria-label="Sample 36, Cloned from Clean, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/36_2_4.wav" aria-label="Sample 36, Cloned from AntiFake, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/36_3_4.wav" aria-label="Sample 36, Cloned from SafeSpeech, cloned by xtts-v2"></audio></div>
-<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/36_4_4.wav" aria-label="Sample 36, Cloned from E2E-VGuard, cloned by xtts-v2"></audio></div>
-<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/36_5_4.wav" aria-label="Sample 36, Cloned from Thanos, cloned by xtts-v2"></audio></div>
+<div class="rowhead">QMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Clean</div><audio controls preload="none" src="MOS/36_1_4.wav" aria-label="Sample 36, Clean, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>AntiFake</div><audio controls preload="none" src="MOS/36_2_4.wav" aria-label="Sample 36, AntiFake, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>SafeSpeech</div><audio controls preload="none" src="MOS/36_3_4.wav" aria-label="Sample 36, SafeSpeech, QMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>E2E-VGuard</div><audio controls preload="none" src="MOS/36_4_4.wav" aria-label="Sample 36, E2E-VGuard, QMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Thanos</div><audio controls preload="none" src="MOS/36_5_4.wav" aria-label="Sample 36, Thanos, QMOS"></audio></div>
+<div class="rowhead">SMOS</div>
+<div class="cell"><div class="m"><span class="dot" style="background:#9E9E9E"></span>Cloned from Clean</div><audio controls preload="none" src="SMOS/36_1_4.wav" aria-label="Sample 36, Cloned from Clean, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#F58518"></span>Cloned from AntiFake</div><audio controls preload="none" src="SMOS/36_2_4.wav" aria-label="Sample 36, Cloned from AntiFake, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#E45756"></span>Cloned from SafeSpeech</div><audio controls preload="none" src="SMOS/36_3_4.wav" aria-label="Sample 36, Cloned from SafeSpeech, SMOS"></audio></div>
+<div class="cell"><div class="m"><span class="dot" style="background:#4C78A8"></span>Cloned from E2E-VGuard</div><audio controls preload="none" src="SMOS/36_4_4.wav" aria-label="Sample 36, Cloned from E2E-VGuard, SMOS"></audio></div>
+<div class="cell thanos"><div class="m"><span class="dot" style="background:#54A24B"></span>Cloned from Thanos</div><audio controls preload="none" src="SMOS/36_5_4.wav" aria-label="Sample 36, Cloned from Thanos, SMOS"></audio></div>
 </div>
 </article>
 </section>
